@@ -35,7 +35,8 @@ func Shutdown(ctx context.Context) (done chan struct{}) {
 func createServer() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/api/ads", controllers.GetAds).Methods("GET")
-	router.HandleFunc("/api/ads", controllers.CreateAd).Methods("POST")
+	router.HandleFunc("/api/ads", controllers.CreateAd).Queries().Methods("POST")
+	router.HandleFunc("/api/ads/{id}", controllers.DeleteAd).Methods("DELETE")
 	srv = &http.Server{
 		Addr:    ":8000",
 		Handler: router,
