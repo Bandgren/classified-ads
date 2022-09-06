@@ -11,11 +11,6 @@ import (
 var Instance *gorm.DB
 var err error
 
-func Start() {
-	Connect()
-	Migrate()
-}
-
 func Connect() {
 	Instance, err = gorm.Open(mysql.Open(os.Getenv("SQL_CONNECTION_STRING")), &gorm.Config{})
 	if err != nil {

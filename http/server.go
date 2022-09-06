@@ -36,5 +36,9 @@ func createServer() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/api/ads", controllers.GetAds).Methods("GET")
 	router.HandleFunc("/api/ads", controllers.CreateAd).Methods("POST")
+	srv = &http.Server{
+		Addr:    ":8000",
+		Handler: router,
+	}
 
 }

@@ -16,7 +16,7 @@ func CreateAd(w http.ResponseWriter, r *http.Request) {
 }
 func GetAds(w http.ResponseWriter, r *http.Request) {
 	var ads []entities.Ad
-	database.Instance.Find(&entities.Ad{})
+	database.Instance.Find(&ads)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(ads)
