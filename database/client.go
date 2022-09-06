@@ -5,16 +5,21 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"log"
+	"os"
 )
 
 var Instance *gorm.DB
 var err error
 
-func Connect(connectionString string) {
-	Instance, err = gorm.Open(mysql.Open(connectionString), &gorm.Config{})
+func Start() {
+	Connect()
+	Migrate()
+}
+
+func Connect() {
+	Instance, err = gorm.Open(mysql.Open(os.Getenv("SQL_CONNECTION_STRING")), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)
-		panic("Cannot connect to DB")
 	}
 	log.Println("Connected to Database...")
 }
