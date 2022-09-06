@@ -27,8 +27,7 @@ func start() (ctx context.Context, cancel context.CancelFunc) {
 	// This is the main context for the service. When it is canceled it means the service is going down.
 	// All the tasks must be canceled
 	ctx, cancel = context.WithCancel(context.Background())
-	database.Connect()
-	database.Migrate()
+	database.Start()
 	http.Start()
 	return
 }

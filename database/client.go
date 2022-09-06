@@ -11,7 +11,12 @@ import (
 var Instance *gorm.DB
 var err error
 
-func Connect() {
+func Start() {
+	connect()
+	migrate()
+}
+
+func connect() {
 	Instance, err = gorm.Open(mysql.Open(os.Getenv("SQL_CONNECTION_STRING")), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)
@@ -19,7 +24,7 @@ func Connect() {
 	log.Println("Connected to Database...")
 }
 
-func Migrate() {
+func migrate() {
 	Instance.AutoMigrate(&entities.Ad{})
 	log.Println("Database Migration Completed...")
 }
