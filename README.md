@@ -11,7 +11,7 @@ were inserted and by their price.
 
 ## Running it
 
-The service needs Mysql to run succsuccessfullyesfully. Let's use `docker-compose` to run those servers.
+The service needs Mysql to run successfully. Let's use `docker-compose` to run those servers.
 
 ```bash
 docker-compose up -d mysql
