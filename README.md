@@ -31,6 +31,8 @@ To run as a service we can create an image and use docker-compose to start the c
 docker build . -t service:latest
 ```
 
+PS: Docker file uses revive (go lint successor) and gosec tools to validate code written in the solution is following some standard go best practices.
+
 Now we can run all the servers together using `docker-compose`.
 
 ```bash
