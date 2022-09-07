@@ -6,6 +6,7 @@ import (
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"time"
 )
 
 var srv *http.Server
@@ -38,8 +39,10 @@ func createServer() {
 	router.HandleFunc("/api/ads", controllers.CreateAd).Queries().Methods("POST")
 	router.HandleFunc("/api/ads/{id}", controllers.DeleteAd).Methods("DELETE")
 	srv = &http.Server{
-		Addr:    ":8000",
-		Handler: router,
+		Addr:         ":8000",
+		Handler:      router,
+		ReadTimeout:  2 * time.Second,
+		WriteTimeout: 10 * time.Second,
 	}
 
 }

@@ -1,6 +1,20 @@
 version: '3.9'
 
 services:
+  service:
+    hostname: service
+    image: service:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - SQL_CONNECTION_STRING=root:root@tcp(mysql:3306)/ads?parseTime=true
   mysql:
     image: mysql:8
     ports:
@@ -10,3 +24,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=ads
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10

@@ -25,6 +25,9 @@ func connect() {
 }
 
 func migrate() {
-	Instance.AutoMigrate(&entities.Ad{})
+	err := Instance.AutoMigrate(&entities.Ad{})
+	if err != nil {
+		log.Fatal(err)
+	}
 	log.Println("Database Migration Completed...")
 }
